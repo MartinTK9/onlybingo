@@ -5,7 +5,8 @@ from .models import Player
 
 def index(request, player_name):
     #player_name = 'mtk'
-    '''
+    name = Player.objects.filter(name=player_name, bool=0)
+
     col1num = list(range(1, 16))
     col2num = list(range(16, 31))
     col3num = list(range(31, 46))
@@ -46,20 +47,28 @@ def index(request, player_name):
 
         return array
 
-    board = boardgenerator()
-    '''
+    if name:
+        board = [[1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, '', 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5]]
 
-    db = Player()
+        dbrow0 = ''.join(str(e) for e in board[0])
+        dbrow1 = ''.join(str(e) for e in board[0])
+        dbrow2 = ''.join(str(e) for e in board[0])
+        dbrow3 = ''.join(str(e) for e in board[0])
+        dbrow4 = ''.join(str(e) for e in board[0])
+    else:
+        board = boardgenerator()
 
-    db.room_id = 1
-    db.name = player_name
-    db.row0 = '1234567890'
-    db.row1 = '1234567890'
-    db.row2 = '12345678'
-    db.row3 = '1234567890'
-    db.row4 = '1234567890'
+        db = Player()
 
-    db.save()
+        db.room_id = 1
+        db.name = player_name
+        db.row0 = '1234567890'
+        db.row1 = '1234567890'
+        db.row2 = '12345678'
+        db.row3 = '1234567890'
+        db.row4 = '1234567890'
+
+        db.save()
 
     context = {
         'message': 'render test',
