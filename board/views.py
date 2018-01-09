@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from random import randint
+from .models import Player
 
 
-def index(request):
+def index(request, player_name):
+    #player_name = 'mtk'
+    '''
     col1num = list(range(1, 16))
     col2num = list(range(16, 31))
     col3num = list(range(31, 46))
@@ -44,6 +47,19 @@ def index(request):
         return array
 
     board = boardgenerator()
+    '''
+
+    db = Player()
+
+    db.room_id = 1
+    db.name = player_name
+    db.row0 = '1234567890'
+    db.row1 = '1234567890'
+    db.row2 = '12345678'
+    db.row3 = '1234567890'
+    db.row4 = '1234567890'
+
+    db.save()
 
     context = {
         'message': 'render test',
