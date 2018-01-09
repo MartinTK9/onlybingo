@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Hello world!</h1>
+    <h2>{{ message }}</h2>
+    <table>
+        {% for array in board %}
+            <tr>
+                {% for num in array %}
+                    <td>
+                        {{ num }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
