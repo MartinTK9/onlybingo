@@ -8,11 +8,24 @@ class Rooms(models.Model):
     def __str__(self):
         return str(self.room_id) + ' - ' + self.name
 
+    class Meta:
+        db_table = 'rooms'
 
-class Player(models.Model):
+
+class PlayerInfo(models.Model):
     player_id = models.AutoField(primary_key=True)
     room = models.ForeignKey('Rooms', on_delete=models.CASCADE)
     name = models.CharField(max_length=30, null=True)
+
+    def __str__(self):
+        return str(self.room_id) + ' - ' + self.name
+
+    class Meta:
+        db_table = 'player_info'
+
+
+class PlayerBoard(models.Model):
+    player = models.ForeignKey('PlayerInfo', on_delete=models.CASCADE)
     bool = models.BooleanField(default=0)
     row0 = models.CharField(null=True, max_length=10)
     row1 = models.CharField(null=True, max_length=10)
@@ -21,5 +34,7 @@ class Player(models.Model):
     row4 = models.CharField(null=True, max_length=10)
 
     def __str__(self):
-        return str(self.room_id) + ' - ' + self.name
+        return str(self.player_id) + ' - ' + str(self.bool)
 
+    class Meta:
+        db_table = 'player_board'

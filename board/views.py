@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from random import randint
-from .models import Player
+from .models import *
 
 
 def index(request, player_name):
