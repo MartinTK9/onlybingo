@@ -16,6 +16,7 @@ class PlayerInfo(models.Model):
     player_id = models.AutoField(primary_key=True)
     room = models.ForeignKey('Rooms', on_delete=models.CASCADE)
     name = models.CharField(max_length=30, null=True)
+    bool = models.BooleanField(default=0)
 
     def __str__(self):
         return str(self.room_id) + ' - ' + self.name

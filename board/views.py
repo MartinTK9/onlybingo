@@ -4,7 +4,7 @@ from .models import *
 
 
 def index(request, player_name):
-    name = Player.objects.filter(name=player_name, bool=0)
+    name = PlayerInfo.objects.filter(name=player_name, bool=0)
 
     col1num = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
     col2num = list(range(16, 31))
@@ -90,10 +90,16 @@ def index(request, player_name):
         strrow3 = ''.join(str(e) for e in board[3])
         strrow4 = ''.join(str(e) for e in board[4])
 
-        db = Player()
+        player = PlayerInfo()
 
-        db.room_id = 1
-        db.name = player_name
+        player.room_id = 1
+        player.name = player_name
+
+        player.save()
+
+        db = PlayerBoard()
+
+        db.player_id = player.player_id
         db.row0 = strrow0
         db.row1 = strrow1
         db.row2 = strrow2
