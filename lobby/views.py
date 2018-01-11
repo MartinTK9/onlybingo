@@ -9,11 +9,10 @@ from .serializers import *
 from rest_framework.decorators import api_view
 
 #API DOCUMENTATION
-def API(request):
-    return render(request,'attend/API Documentation.html')
+
 #API
-#/Api/student/<pk>
-class StudentDetail(APIView):
+#/Api/lobby/<pk>
+class LobbyDetail(APIView):
     def get_object(selfs,pk):
         try:
             return PersonalInformation.objects.get(pk=pk)
@@ -28,9 +27,9 @@ class StudentDetail(APIView):
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 #/Api/student/
-class StudentList(APIView):
+class LobbyList(APIView):
     def get(self,request):
-        students = PersonalInformation.objects.all()
+        students = Lobby.objects.all()
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data)
     def post(self,request):
