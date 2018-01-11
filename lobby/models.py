@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Rooms(models.Model):
     room_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
@@ -21,6 +22,7 @@ class Player(models.Model):
 
     def __str__(self):
         return str(self.room_id) + ' - ' + self.name
+
 
 class Lobby(models.Model):
     room = models.ForeignKey('Rooms', on_delete=models.CASCADE)
