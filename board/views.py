@@ -3,8 +3,8 @@ from random import randint
 from .models import *
 
 
-def index(request, player_name):
-    name = PlayerInfo.objects.filter(name=player_name, bool=0)
+def index(request, room_id, player_name):
+    name = PlayerInfo.objects.filter(name=player_name, bool=0, room_id=room_id)
 
     col1num = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
     col2num = list(range(16, 31))
@@ -48,6 +48,11 @@ def index(request, player_name):
 
     def dbchecker():
         for i in name:
+            board_id = i.player_id
+
+            bdboard = PlayerBoard.objects.filter(player_id=board_id)
+
+        for i in bdboard:
             dbrow0 = i.row0
             dbrow1 = i.row1
             dbrow2 = i.row2
@@ -92,7 +97,7 @@ def index(request, player_name):
 
         player = PlayerInfo()
 
-        player.room_id = 1
+        player.room_id = room_id
         player.name = player_name
 
         player.save()
