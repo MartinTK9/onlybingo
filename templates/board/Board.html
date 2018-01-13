@@ -1,0 +1,25 @@
+{% extends 'board/base.html' %}
+{% block content %}
+<div class="banner" id="banner"><h1>ONLY BINGO</h1></div>
+
+<div class="bingokaart" id="bingokaart">
+    <table id="bingotabel">
+        <tr>
+            <td><div class="letter" id="01"><p>B</p></div></td>
+            <td><div class="letter" id="02"><p>I</p></div></td>
+            <td><div class="letter" id="03"><p>N</p></div></td>
+            <td><div class="letter" id="04"><p>G</p></div></td>
+            <td><div class="letter" id="05"><p>O</p></div></td>
+        </tr>
+        {% for array in board %}
+            <tr>
+                {% for num in array %}
+                   <td class="number unpressed">
+                       {{ num }}
+                   </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
