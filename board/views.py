@@ -114,8 +114,10 @@ def index(request, room_id, player_name):
 
         db.save()
 
+    board[2][2] = 'free'
+
     context = {
         'message': 'render test',
         'board': board,
     }
-    return render(request, 'board/index.html', context)
+    return render(request, 'board/onlybingo.html', context)
