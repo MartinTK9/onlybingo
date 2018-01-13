@@ -28,4 +28,8 @@ def RoomList(request):
         return HttpResponse(list)
     if request.method == 'POST':
         name = request.POST('name')
-        return HttpResponse(name)
+        speed = request.POST('speed')
+        players = request.POST('players')
+        new = Rooms(name = name,speed=speed,players=players)
+        new.save()
+        return HttpResponse(new)

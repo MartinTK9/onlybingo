@@ -121,3 +121,9 @@ def index(request, room_id, player_name):
         'board': board,
     }
     return render(request, 'board/board.html', context)
+
+def lobby(request):
+    rooms = Rooms.objects.all()
+    players = PlayerInfo.objects.all()
+    context={'rooms':rooms,'players':players}
+    return render(request,'board/lobby.html',context)
