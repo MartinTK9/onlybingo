@@ -117,7 +117,6 @@ def index(request, room_id, player_name):
     board[2][2] = 'free'
 
     context = {
-        'message': 'render test',
         'board': board,
     }
     return render(request, 'board/board.html', context)

@@ -7,29 +7,30 @@ from django.http import Http404
 
 from .models import *
 
-
-
 #API DOCUMENTATION
 
 #API
 #/Api/lobby/<pk>
-def RoomDetail(request,pk):
+
+
+def roomdetail(request, pk):
     if request.method == 'GET':
-        list = PlayerInfo.objects.get(pk=pk)
-        return HttpResponse(list)
+        obj = PlayerInfo.objects.get(pk=pk)
+        return HttpResponse(obj)
     if request.method == 'POST':
         name = request.POST('name')
         return HttpResponse(name)
     return HttpResponse('hi')
 
-def RoomList(request):
+
+def roomlist(request):
     if request.method == 'GET':
-        list = Rooms.objects.all()
-        return HttpResponse(list)
+        obj = Rooms.objects.all()
+        return HttpResponse(obj)
     if request.method == 'POST':
         name = request.POST('name')
         speed = request.POST('speed')
         players = request.POST('players')
-        new = Rooms(name = name,speed=speed,players=players)
+        new = Rooms(name=name, speed=speed, players=players)
         new.save()
         return HttpResponse(new)
