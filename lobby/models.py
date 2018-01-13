@@ -4,6 +4,9 @@ from django.db import models
 class Rooms(models.Model):
     room_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
+    speed = models.IntegerField(default=20)
+    players = models.IntegerField(default=5)
+
 
     def __str__(self):
         return str(self.room_id) + ' - ' + self.name
