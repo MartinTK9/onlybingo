@@ -120,4 +120,4 @@ def index(request, room_id, player_name):
         'message': 'render test',
         'board': board,
     }
-    return render(request, 'board/base.html', context)
+    return render(request, 'board/board.html', context)
