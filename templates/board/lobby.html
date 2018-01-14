@@ -5,7 +5,7 @@
     <h1>LOBBYLIST</h1>
     <br><br>
     <table class="lobbylist">
-        <tr><th class="th1">Name</th><th class="th2">Players</th><th class="th1">Ballspeed</th></tr>
+        <tr><th class="th1">Name</th><th class="th2">Players</th><th class="th1">Ballspeed</th><th></th></tr>
         {% for room in rooms %}
         <tr>
             <td>{{ room.name }}</td>
@@ -23,15 +23,12 @@
         <table class="lobbylist">
             <tr>
                 <th class="th1">
-                    <input type="radio" name="Name" >
                     Name
                 </th>
                 <th class="th2">
-                    <input type="radio" name="Numberofplayers" >
                     Number of players
                 </th>
                 <th class="th1">
-                    <input type="radio" name="Ballspeed" >
                     Ballspeed
                 </th>
             </tr>
