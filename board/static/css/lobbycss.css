@@ -1,0 +1,111 @@
+* {
+background-color: blue;
+font-family: sans-serif;}
+.banner, .banner h1 {
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+font-size: 70px;
+color: red;}
+.unpressed, .unpressed p {
+background-color: lightblue;
+color: darkgray;}
+.pressed, .pressed p {
+background-color: darkblue;
+color: darkgray;}
+.number, .letter {
+text-align: center;
+color: darkgray;
+font-size: 23px;
+width: 40px;
+height: 35px;
+position: relative;}
+.letter {
+font-weight: bold;}
+.number, #free {
+border-color: black;
+border-style: solid;
+border-width: 2px;}
+.number p, #free p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);} 
+#free p {
+font-size: 13px}
+.hide {
+display: none;}
+#free {
+width: 40px;
+height: 35px;
+vertical-align: middle;
+width: 40px;
+height: 35px;
+position: relative;}
+.bingokaart, #bingotabel, .landing, .highsco, .shopbutton, .lobbylist{
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+}
+	
+.button, .form, .landing a{
+	font-size: 33px;
+	color: red;
+}
+.lbutt {
+width: 250px;}
+#roominfo {
+position: absolute;
+top: 175px;
+left: 100px;
+font-size: 20px;
+font-weight: bold;}
+.highsco, .highsco table {
+color: red;
+font-size: 25px;
+}
+.highsco table, .highsco th, .highsco td, .th {
+border-bottom-style: solid;
+border-bottom-color: red;
+border-width: 2px;
+text-align: center;}
+.th1{
+width: 200px}
+.th2{
+width: 100px}
+.joinpage {
+position: absolute; 
+top: 100px; 
+left: 200px;
+text-align: left;
+font-size: 25px;}
+.globalpickednumber{
+	text-align: center;	
+	backgroundcolor: red;  
+	  }
+  .pickednumber{ 
+	text-align: center;
+	backgroundcolor: red;
+	color: black;
+	font-weight: bold;
+	font-size: 65px;
+	border-radius:50%;
+	  
+	  }
+.payment{
+font-size: 18px;
+color: red;
+margin-left: 50px;
+font-weight: bold}
+
+
+.lobbylist, .lobbylist table {
+color: red;
+font-size: 25px}
+
+.lobbylist table, .lobbylist th, .lobbylist td, .th {
+border-bottom-style: solid;
+border-bottom-color: red;
+border-width: 2px;
+text-align: center;}

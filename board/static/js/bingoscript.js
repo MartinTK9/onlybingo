@@ -13,32 +13,7 @@ $(document).ready(() => {
    $('.unpressed').on('click', event => {
 		$(event.currentTarget).toggleClass('pressed');
    	});
-//buttons landing
-   $('#create').on('click', event => {
-		$('.cardpage').removeClass('hide');
-		$('.landing').addClass('hide');
-   	});
 
-	 $('#highsco').on('click', event => {
-		$('.highsco').removeClass('hide');
-		$('.landing').addClass('hide');
-   	});
-
-//back buttons
-	$('#backhigh').on('click', event => {
-		$('.highsco').addClass('hide');
-		$('.landing').removeClass('hide');
-   	});
-
-	$('#backcard').on('click', event => {
-		$('.cardpage').addClass('hide');
-		$('.landing').removeClass('hide');
-   	});
-
-	$('#backjoin').on('click', event => {
-		$('.joinpage').addClass('hide');
-		$('.landing').removeClass('hide');
-   	});
 //other buttons
 	$('#join').on('click', event => {
 		$('.cardpage').removeClass('hide');
