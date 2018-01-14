@@ -1,0 +1,8 @@
+{% extends 'board/base.html' %}
+{% block content %}
+<h1>{{ detail.name }}</h1>
+
+    {% if host %}
+        <button>start game</button>
+    {% endif %}
+{% endblock %}

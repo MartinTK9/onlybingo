@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from random import randint
 from .models import *
@@ -145,5 +146,38 @@ def lobby(request):
 def index(request):
     return render(request, 'board/index.html')
 
+
 def create(request):
     return render(request, 'board/Create.html')
+
+
+def room(request):
+
+    if request.POST.get('bool', False):
+        newroom = Rooms()
+
+        newroom.name = request.POST['name']
+        newroom.speed = request.POST['speed']
+        newroom.players = request.POST['players']
+
+        newroom.save()
+
+        host = True
+
+    elif request.POST.get('game', False):
+        rooms = Rooms.objects.filter(pk=request.POST['game'])
+
+        for e in rooms:
+            newroom = e
+
+        host = False
+
+    else:
+        raise Http404
+
+    context = {
+        'host': host,
+        'detail': newroom,
+    }
+
+    return render(request, 'board/room.html', context)

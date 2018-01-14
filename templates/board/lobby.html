@@ -4,22 +4,25 @@
 <div class='lobbylist title'>
     <h1>LOBBYLIST</h1>
     <br><br>
-    <table class="lobbylist">
-        <tr><th class="th1">Name</th><th class="th2">Players</th><th class="th1">Ballspeed</th><th></th></tr>
-        {% for room in rooms %}
-        <tr>
-            <td>{{ room.name }}</td>
-            <td>{{ room.players }}</td>
-            <td>{{ room.speed }}</td>
-            <td><input type="submit" value="join" id="{{ room.room_id }}"></td>
-        </tr>
-        {% endfor %}
-    </table>
+    <form action="{% url 'room' %}" method="post">
+        {% csrf_token %}
+        <table class="lobbylist">
+            <tr><th class="th1">Name</th><th class="th2">Players</th><th class="th1">Ballspeed</th><th></th></tr>
+            {% for room in rooms %}
+                <tr>
+                    <td>{{ room.name }}</td>
+                    <td>{{ room.players }}</td>
+                    <td>{{ room.speed }}</td>
+                    <td><input type="submit" value="join" ></td>
+                </tr>
+                <input type="hidden" name="game" value="{{ room.room_id }}">
+            {% endfor %}
+        </table>
+    </form>
     <br><br>
     <p>Search for:</p>
     <form action="/lobby/" method="post">
         {% csrf_token %}
-        <input type="hidden" name="bool" value="1">
         <table class="lobbylist">
             <tr>
                 <th class="th1">
@@ -37,10 +40,10 @@
                     <input type='text' name="Nametxt">
                 </td>
                 <td>
-                    <input type='number' name="Numberofplayerstxt">
+                    <input type='number' min="0" name="Numberofplayerstxt">
                 </td>
                 <td>
-                    <input type='number' name="Ballspeedtxt">
+                    <input type='number' min="0" name="Ballspeedtxt">
                 </td>
             </tr>
         </table>
@@ -48,7 +51,7 @@
         <input type="submit" value="filter">
     </form>
         <br>
-    <button type="button" id="backlobbylist" style="margin-bottom: 30px">Back to menu</button>
+    <a id="backlobbylist" style="margin-bottom: 30px" href="{% url 'index' %}">Back to menu</a>
 
 </div>
 {% endblock %}
