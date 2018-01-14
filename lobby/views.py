@@ -2,8 +2,11 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import *
 from .models import *
-
+from rest_framework.views import APIView
 from django.http import Http404
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import *
 
 from .models import *
 
@@ -13,24 +16,16 @@ from .models import *
 #/Api/lobby/<pk>
 
 
-def roomdetail(request, pk):
-    if request.method == 'GET':
-        obj = PlayerInfo.objects.get(pk=pk)
-        return HttpResponse(obj)
-    if request.method == 'POST':
-        name = request.POST('name')
-        return HttpResponse(name)
-    return HttpResponse('hi')
 
-
-def roomlist(request):
-    if request.method == 'GET':
-        obj = Rooms.objects.all()
-        return HttpResponse(obj)
-    if request.method == 'POST':
-        name = request.POST('name')
-        speed = request.POST('speed')
-        players = request.POST('players')
-        new = Rooms(name=name, speed=speed, players=players)
-        new.save()
-        return HttpResponse(new)
+class roomlist(APIView):
+    def get(selfs,request):
+        rooms = Rooms.objects.all()
+        serializer=roomSerializer(rooms,many=true)
+        return Response(serializer.data)
+    def post(selfs,request):
+        serializer=roomSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
