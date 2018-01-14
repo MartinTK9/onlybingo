@@ -5,4 +5,5 @@ urlpatterns = [
     path('<int:room_id>/<str:player_name>/', views.board, name='board'),
     path('lobby/', views.lobby, name='lobby'),
     path('', views.index, name='index'),
+    path('create/', views.create, name='create'),
 ]

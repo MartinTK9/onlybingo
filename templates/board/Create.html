@@ -1,0 +1,15 @@
+{% extends 'board/base.html' %}
+{% block content %}
+<div class="bingokaart">
+    <form action="http://www.hulstjes.nl/API/lobby">
+        <p>Game name:</p>
+        <input type="text" name="name" required="true">
+        <p>Max Players:(default is 20)</p>
+        <input type="text" name="players">
+        <p>Seconds between balls:</p>
+        <input type="number" name="speed">
+        <br><br>
+        <input type="submit" value="Create game">
+    </form>
+</div>
+{% endblock %}

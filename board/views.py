@@ -144,3 +144,6 @@ def lobby(request):
 
 def index(request):
     return render(request, 'board/index.html')
+
+def create(request):
+    return render(request, 'board/Create.html')
