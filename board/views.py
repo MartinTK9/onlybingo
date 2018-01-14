@@ -3,7 +3,7 @@ from random import randint
 from .models import *
 
 
-def index(request, room_id, player_name):
+def board(request, room_id, player_name):
     name = PlayerInfo.objects.filter(name=player_name, bool=0, room_id=room_id)
 
     col1num = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
@@ -126,3 +126,6 @@ def lobby(request):
     players = PlayerInfo.objects.all()
     context={'rooms':rooms,'players':players}
     return render(request,'board/lobby.html',context)
+
+def index(request):
+    return render(request,'board/index.html')

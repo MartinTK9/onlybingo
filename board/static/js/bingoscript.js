@@ -24,10 +24,6 @@ $(document).ready(() => {
 		$('.landing').addClass('hide');
    	});
 
-	$('#joinpage').on('click', event => {
-		$('.joinpage').removeClass('hide');
-		$('.landing').addClass('hide');
-   	});
 //back buttons
 	$('#backhigh').on('click', event => {
 		$('.highsco').addClass('hide');

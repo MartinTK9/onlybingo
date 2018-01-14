@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Hello world!</h1>
-    <h2>{{ message }}</h2>
-    <table>
-        {% for array in board %}
-            <tr>
-                {% for num in array %}
-                    <td>
-                        {{ num }}
-                    </td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
-</body>
-</html>
+{% extends 'board/base.html' %}
+{% block content %}
+    <div class="landing">
+        <br><br>
+        <div class="landing button">
+            <button type="button" class="lbutt" id="create">Create game</button>
+        </div><br><div class="landing button">
+        <a href="http://www.hulstjes.nl/board/lobby">
+            <button type="button" class="lbutt" id="joinpage">Join game</button>
+            </a>
+        </div><br><div class="landing button">
+            <button type="button" class="lbutt" id="highsco">High-scores</button>
+        </div><br><div class="landing button">
+            <button type="button" class="lbutt" id="settings">Settings</button>
+        </div><br><div class="landing button" id="Create">
+            <a href="C:\Users\Gebruiker\Documents\only bingo\shop.html"><button type="button" class="lbutt">Shop</button></a>
+        </div>
+    </div>
+{% endblock %}
