@@ -11,23 +11,47 @@
             <td>{{ room.name }}</td>
             <td>{{ room.players }}</td>
             <td>{{ room.speed }}</td>
+            <td><input type="submit" value="join" id="{{ room.room_id }}"></td>
         </tr>
         {% endfor %}
     </table>
     <br><br>
     <p>Search for:</p>
-    <table class="lobbylist">
-    <tr><th class="th1"><input type="radio" name="search" value="Name" >Name</th><th class="th2"><input type="radio" name="search" value="Numberofplayers">Number of players</th><th class="th1"><input type="radio" name="search" value="Open" > Open?</th><th class="th1"><input type="radio" name="search" value="Ballspeed" > Ballspeed</th></tr>
-    <tr><td><input type='text'></td><td><input type='text'></td><td><input type='text'></td><td><input type='text'></td></tr>
+    <form action="/lobby/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="bool" value="1">
+        <table class="lobbylist">
+            <tr>
+                <th class="th1">
+                    <input type="radio" name="Name" >
+                    Name
+                </th>
+                <th class="th2">
+                    <input type="radio" name="Numberofplayers" >
+                    Number of players
+                </th>
+                <th class="th1">
+                    <input type="radio" name="Ballspeed" >
+                    Ballspeed
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type='text' name="Nametxt">
+                </td>
+                <td>
+                    <input type='number' name="Numberofplayerstxt">
+                </td>
+                <td>
+                    <input type='number' name="Ballspeedtxt">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="filter">
+    </form>
+        <br>
+    <button type="button" id="backlobbylist" style="margin-bottom: 30px">Back to menu</button>
 
-    </table><br>
-
-       <input type="submit" value="submit"><br><br>
-
-
-    <button type="button" id="backlobbylist">Back to menu</button>
 </div>
-
-<!-- end of lobbylist part-->
-<script src='lobbyjs.js'></script>
 {% endblock %}

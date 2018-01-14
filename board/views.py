@@ -121,11 +121,26 @@ def board(request, room_id, player_name):
     }
     return render(request, 'board/board.html', context)
 
+
 def lobby(request):
-    rooms = Rooms.objects.all()
     players = PlayerInfo.objects.all()
-    context={'rooms':rooms,'players':players}
-    return render(request,'board/lobby.html',context)
+
+    if request.POST.get('Nametxt', False):
+        rooms = Rooms.objects.filter(name=request.POST['Nametxt'])
+    elif request.POST.get('Numberofplayerstxt', False):
+        rooms = Rooms.objects.filter(players=request.POST['Numberofplayerstxt'])
+    elif request.POST.get('Ballspeedtxt', False):
+        rooms = Rooms.objects.filter(speed=request.POST['Ballspeedtxt'])
+    else:
+        rooms = Rooms.objects.all()
+
+    context = {
+        'rooms': rooms,
+        'players': players,
+    }
+
+    return render(request, 'board/lobby.html', context)
+
 
 def index(request):
-    return render(request,'board/index.html')
+    return render(request, 'board/index.html')
