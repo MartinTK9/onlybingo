@@ -1,20 +1,33 @@
 {% extends 'board/base.html' %}
 {% block content %}
-
-<div>
-    <table>
-        <tr>
-            <td style="display:none;"><p>game_id</p></td>
-            <td><p>Game name</p></td>
-            <td><p>players</p></td>
-        </tr>
+<!-- start of lobbylist part-->
+<div class='lobbylist title'>
+    <h1>LOBBYLIST</h1>
+    <br><br>
+    <table class="lobbylist">
+        <tr><th class="th1">Name</th><th class="th2">Players</th><th class="th1">Ballspeed</th></tr>
         {% for room in rooms %}
         <tr>
-            <td style="display:none;">{{ room.room_id }}</td>
             <td>{{ room.name }}</td>
             <td>{{ room.players }}</td>
+            <td>{{ room.speed }}</td>
         </tr>
         {% endfor %}
     </table>
+    <br><br>
+    <p>Search for:</p>
+    <table class="lobbylist">
+    <tr><th class="th1"><input type="radio" name="search" value="Name" >Name</th><th class="th2"><input type="radio" name="search" value="Numberofplayers">Number of players</th><th class="th1"><input type="radio" name="search" value="Open" > Open?</th><th class="th1"><input type="radio" name="search" value="Ballspeed" > Ballspeed</th></tr>
+    <tr><td><input type='text'></td><td><input type='text'></td><td><input type='text'></td><td><input type='text'></td></tr>
+
+    </table><br>
+
+       <input type="submit" value="submit"><br><br>
+
+
+    <button type="button" id="backlobbylist">Back to menu</button>
 </div>
+
+<!-- end of lobbylist part-->
+<script src='lobbyjs.js'></script>
 {% endblock %}
