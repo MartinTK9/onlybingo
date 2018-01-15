@@ -2,33 +2,39 @@
 {% load static %}
 {% block content %}
 
-<input id="seconds" class="hidden" value="{{ game.speed }}">
-<div class="bingokaart" id="bingokaart">
-    <table id="bingotabel">
-        <tr>
-            <td><div class="letter" id="01"><p>B</p></div></td>
-            <td><div class="letter" id="02"><p>I</p></div></td>
-            <td><div class="letter" id="03"><p>N</p></div></td>
-            <td><div class="letter" id="04"><p>G</p></div></td>
-            <td><div class="letter" id="05"><p>O</p></div></td>
-        </tr>
-        {% for array in board %}
+    <input id="seconds" class="hidden" value="{{ game.speed }}">
+    <div class="bingokaart" id="bingokaart">
+        <table id="bingotabel">
             <tr>
-                {% for num in array %}
-                   <td class="number unpressed">
-                       {{ num }}
-                   </td>
-                {% endfor %}
+                <td><div class="letter" id="01"><p>B</p></div></td>
+                <td><div class="letter" id="02"><p>I</p></div></td>
+                <td><div class="letter" id="03"><p>N</p></div></td>
+                <td><div class="letter" id="04"><p>G</p></div></td>
+                <td><div class="letter" id="05"><p>O</p></div></td>
             </tr>
-        {% endfor %}
-    </table>
+            {% for array in board %}
+                <tr>
+                    {% for num in array %}
+                       <td class="number unpressed">
+                           {{ num }}
+                       </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
 
-   	<button type="button" id="bingo">Bingo!</button>
-		<button type="button" id="backcard">Back to menu</button>
+        <button type="button" onclick="test()" id="bingo">Bingo!</button>
 
 
-   	<button id="ball" class = "pickednumber" type="button" disabled></button>
+        <button id="ball" class="pickednumber" type="button" disabled></button>
 
-</div>
-<script src="{% static 'js/board.js' %}"></script>
+    </div>
+
+    <script src="{% static 'js/board.js' %}"></script>
+
+    <script>
+        function test() {
+            window.location.href='check/'
+        }
+    </script>
 {% endblock %}

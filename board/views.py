@@ -257,7 +257,7 @@ def dbcheck(request, player_id, room_id):
             if checker(int(num), numbers):
                 count += 1
                 if count == 5:
-                    return HttpResponse('BINGO!')
+                    return render(request, 'board/bingo.html', {'bingo': True})
         count = 0
 
-    return HttpResponse('No bingo')
+    return render(request, 'board/bingo.html', {'bingo': False})

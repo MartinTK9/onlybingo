@@ -1,0 +1,14 @@
+{% extends 'board/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="bingokaart">
+        {% if bingo %}
+            <h1>You do have bingo</h1>
+            <img src="http://s2.quickmeme.com/img/91/91ec3eed3b5a49a46bd6723bce7b17e8aa658f9205e912830c57dd8e74754c43.jpg">
+        {% else %}
+            <h1>You don't have bingo</h1>
+        {% endif %}
+    </div>
+
+{% endblock %}
