@@ -11,6 +11,11 @@
 	color: #674d3c;
 }
 
+.banner:hover {
+	color: #594334;
+	text-decoration: none;
+}
+
 .unpressed, .unpressed p {
 	background-color: lightblue;
 	color: darkgray;

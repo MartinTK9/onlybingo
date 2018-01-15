@@ -1,7 +1,7 @@
 {% extends 'board/base.html' %}
 {% block content %}
 <!-- start of lobbylist part-->
-<div class='lobbylist title'>
+<div class='lobbylist title' style="padding-bottom: 60px">
     <h1 style="padding-top: 20px">LOBBYLIST</h1>
     <br><br>
     <table class="lobbylist">
@@ -46,15 +46,5 @@
         <br>
         <input type="submit" value="filter">
     </form>
-        <br>
-    <a id="backlobbylist" style="padding-bottom: 30px" href="{% url 'index' %}">Back to menu</a>
-
 </div>
-<script>
-    function requestName(id) {
-        var name = prompt("Please enter a name");
-        var url = '/room/' + id + '/' + name;
-        window.location.href=url;
-    }
-</script>
 {% endblock %}

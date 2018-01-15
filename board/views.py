@@ -5,7 +5,7 @@ from .models import *
 
 
 def board(request, room_id, player_id):
-    name = PlayerBoard.objects.get(player_id=player_id, bool=0)
+    player = PlayerBoard.objects.filter(player_id=player_id, bool=0)
 
     col1num = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
     col2num = list(range(16, 31))
@@ -48,7 +48,7 @@ def board(request, room_id, player_id):
         return array
 
     def dbchecker():
-        for i in name:
+        for i in player:
             dbrow0 = i.row0
             dbrow1 = i.row1
             dbrow2 = i.row2
@@ -79,7 +79,7 @@ def board(request, room_id, player_id):
             x *= 2
             row.append(dbrow[x:x+2])
 
-    if name:
+    if player:
         board = dbchecker()
 
     else:
@@ -91,11 +91,11 @@ def board(request, room_id, player_id):
         strrow3 = ''.join(str(e) for e in board[3])
         strrow4 = ''.join(str(e) for e in board[4])
 
-        player = PlayerInfo.objects.get(room_id=room_id, player_id=player_id)
+        player2 = PlayerInfo.objects.get(room_id=room_id, player_id=player_id)
 
         db = PlayerBoard()
 
-        db.player_id = player
+        db.player_id = player2.player_id
         db.row0 = strrow0
         db.row1 = strrow1
         db.row2 = strrow2
@@ -196,8 +196,63 @@ def roomjoin(request, pk, name):
     return render(request, 'board/room.html', context)
 
 
-def hostboard(request):
+def dbcheck(request, player_id, room_id):
+    name = PlayerBoard.objects.get(player_id=player_id, bool=0)
 
-    context = {}
+    row0 = []
+    row1 = []
+    row2 = []
+    row3 = []
+    row4 = []
 
-    return render(request, 'board/room.html', context)
+    def dbchecker():
+        dbrow0 = name.row0
+        dbrow1 = name.row1
+        dbrow2 = name.row2
+        dbrow3 = name.row3
+        dbrow4 = name.row4
+
+        appender(row0, dbrow0)
+        appender(row1, dbrow1)
+        appender(row3, dbrow3)
+        appender(row4, dbrow4)
+
+        for x in range(0, 2):
+            x *= 2
+            row2.append(dbrow2[x:x+2])
+
+        row2.append('')
+
+        for x in range(2, 4):
+            x *= 2
+            row2.append(dbrow2[x:x+2])
+
+        array = [row0, row1, row2, row3, row4]
+
+        return array
+
+    def appender(row, dbrow):
+        for x in range(0, 5):
+            x *= 2
+            row.append(dbrow[x:x+2])
+
+    def checker(bnum, numbers):
+        for dnum in numbers:
+            print(dnum)
+            if bnum == dnum:
+                return True
+
+    board = dbchecker()
+
+    numbers = Drawn.objects.filter(room_id=room_id)
+
+    for num in board[0]:
+        print(num)
+        test = checker(int(num), numbers)
+        print(test)
+
+    context = {
+        'board': board
+    }
+
+    return render(request, 'board/board.html', context)
