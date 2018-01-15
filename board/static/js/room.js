@@ -9,7 +9,9 @@ $(document).ready(function() {
         }).fail(function () {
             alert("Error creating room");
         }).done(function () {
+            localStorage.setItem("host",true)
             window.location.replace("http://www.hulstjes.nl/" + $('#pk').val() + "/" + $('#player').val());
         });
     });
+
 });

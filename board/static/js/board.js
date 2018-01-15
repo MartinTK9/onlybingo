@@ -1,18 +1,6 @@
 $(document).ready(function() {
     var seconds=$('#seconds').val();
-    //Needs to run on non-host in room view
-    function gamestarted() {
-        setInterval(function(){
-            $.get("http://www.hulstjes.nl/api/drawn/" + $("#pk").val(),function(){
 
-            }).fail(function(){
-                console.log("game hasnt started yet")
-            }).done(function(){
-                window.clearInterval();
-                window.location.replace("http://www.hulstjes.nl/" + $('#pk').val() + "/" + $('#player').val());
-            })
-        },1000);
-    };
     //Needs to run on non-host in board view
     function getball(){
         var ball=0;

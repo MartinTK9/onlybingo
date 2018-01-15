@@ -7,6 +7,22 @@
 
     {% if host %}
         <button id="startgame">start game</button>
+        <script>$(document).ready(function() {
+    var url = "http://www.hulstjes.nl/api/draw/" + $("#pk").val();
+
+    $('#startgame').on('click',function() {
+        $.get(url, function (data) {
+
+        }).fail(function () {
+            alert("Error creating room");
+        }).done(function () {
+            localStorage.setItem("host",true)
+            window.location.replace("http://www.hulstjes.nl/" + $('#pk').val() + "/" + $('#player').val());
+        });
+    });
+
+});
+</script>
     {% endif %}
     <table class="lobbylist">
         <tr><th class="th1">Name</th><th class="th1">Host</th><th></th></tr>
@@ -19,7 +35,16 @@
     </table>
     {% if not host %}
         <script>
-            document.getElementsByTagName('body').onload = function() { gamestarted() };
+            setInterval(function(){
+            $.get("http://www.hulstjes.nl/api/drawn/" + $("#pk").val(),function(){
+
+            }).fail(function(){
+                console.log("game hasnt started yet")
+            }).done(function(){
+                window.clearInterval();
+                window.location.replace("http://www.hulstjes.nl/" + $('#pk').val() + "/" + $('#player').val());
+            })
+        },1000);
         </script>
     {% endif %}
 {% endblock %}
