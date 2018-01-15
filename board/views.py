@@ -106,8 +106,9 @@ def board(request, room_id, player_id):
         db.save()
 
     board[2][2] = 'free'
-
+    game=Rooms.objects.get(pk=room_id)
     context = {
+        'game':game,
         'board': board,
     }
     return render(request, 'board/board.html', context)

@@ -1,5 +1,12 @@
 $(document).ready(function() {
     var seconds=$('#seconds').val();
+    if (localStorage.getItem("host") == true) {
+        drawball()
+    }
+    else {
+        getball()
+    }
+
 
     //Needs to run on non-host in board view
     function getball(){
