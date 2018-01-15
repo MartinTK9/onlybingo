@@ -11,9 +11,8 @@
             {% for player in players %}
                 <tr>
                     <td>{{ player.name }}</td>
-                    <td>{% if player.bool == 1 %}"host"{% else %}"player"{% endif %}</td>
+                    <td>{% if host %}"host"{% else %}"player"{% endif %}</td>
                 </tr>
-                <input type="hidden" name="" value="{{ room.room_id }}">
             {% endfor %}
         </table>
 {% endblock %}

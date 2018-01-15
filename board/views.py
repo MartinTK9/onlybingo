@@ -158,10 +158,13 @@ def room(request):
 
     player.save()
 
+    players = PlayerInfo.objects.filter(room_id=newroom.room_id)
+
     context = {
         'host': True,
         'detail': newroom,
         'player': player,
+        'players': players,
     }
 
     return render(request, 'board/room.html', context)
@@ -180,12 +183,14 @@ def roomjoin(request, pk, name):
     player.name = name
 
     player.save()
-    players=PlayerInfo.objects.filter(pk=pk)
+
+    players = PlayerInfo.objects.filter(room_id=pk)
+
     context = {
         'host': False,
         'detail': newroom,
         'player': player,
-        'players':players,
+        'players': players,
     }
 
     return render(request, 'board/room.html', context)
