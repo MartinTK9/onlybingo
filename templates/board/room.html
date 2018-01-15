@@ -8,11 +8,11 @@
         <button onclick="gamestart()">start game</button>
     {% endif %}
     <table class="lobbylist">
-            <tr><th class="th1">Name</th></th><th class="th1">Host</th><th></th></tr>
+            <tr><th class="th1">Name</th><th class="th1">Host</th><th></th></tr>
             {% for player in players %}
                 <tr>
                     <td>{{ player.name }}</td>
-                    <td>{% if host %}"host"{% else %}"player"{% endif %}</td>
+                    <td>{% if forloop.counter == 1 %}host{% else %}player{% endif %}</td>
                 </tr>
             {% endfor %}
         </table>

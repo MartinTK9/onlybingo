@@ -8,4 +8,5 @@ urlpatterns = [
     path('create/', views.create, name='create'),
     path('room/', views.room, name='room'),
     path('room/<int:pk>/<str:name>', views.roomjoin, name='roomjoin'),
+    path('board/', views.hostboard, name='host')
 ]
