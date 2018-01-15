@@ -1,5 +1,5 @@
 * {
-	background-color: #E0E0E0;
+	background-color: #b7d7e8 ;
 	font-family: sans-serif;
 }
 
@@ -8,7 +8,7 @@
 	margin-right: auto;
 	text-align: center;
 	font-size: 70px;
-	color: red;
+	color: #674d3c;
 }
 
 .unpressed, .unpressed p {
@@ -71,7 +71,7 @@
 
 .button, .form, .landing a {
 	font-size: 33px;
-	color: red;
+	color: #674d3c;
 }
 
 .lbutt {
@@ -87,13 +87,13 @@
 }
 
 .highsco, .highsco table {
-	color: red;
+	color: #674d3c;
 	font-size: 25px;
 }
 
 .highsco table, .highsco th, .highsco td, .th {
 	border-bottom-style: solid;
-	border-bottom-color: red;
+	border-bottom-color: #674d3c;
 	border-width: 2px;
 	text-align: center;
 }
@@ -116,12 +116,12 @@
 
 .globalpickednumber{
 	text-align: center;
-	background-color: red;
+	background-color: #674d3c;
 	  }
 
 .pickednumber{
 	text-align: center;
-	backgroundc-olor: red;
+	backgroundc-color: #674d3c;
 	color: black;
 	font-weight: bold;
 	font-size: 65px;
@@ -130,19 +130,19 @@
 
 .payment{
 	font-size: 18px;
-	color: red;
+	color: #674d3c;
 	margin-left: 50px;
 	font-weight: bold
 }
 
 .lobbylist, .lobbylist table {
-	color: red;
+	color: #674d3c;
 	font-size: 25px
 }
 
 .lobbylist table, .lobbylist th, .lobbylist td, .th {
 	border-bottom-style: solid;
-	border-bottom-color: red;
+	border-bottom-color: #674d3c;
 	border-width: 2px;
 	text-align: center;
 }
