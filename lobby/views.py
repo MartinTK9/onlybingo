@@ -5,6 +5,7 @@ from .serializers import *
 import datetime
 from .models import *
 from random import randint
+from django.shortcuts import get_object_or_404
 #API DOCUMENTATION
 
 #API
@@ -30,23 +31,30 @@ class connection(APIView):
     def get(self, request):
         players = PlayerDateTime.objects.all()
         now = datetime.datetime.now()
+        seconds_since_midnight_now = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
         for player in players:
             last = player.time
-            diff = now-last
-            if diff.seconds > 10:
-                id = player.player
-                PlayerBoard.objects.filter(players=id).delete()
-                PlayerInfo.objects.filter(players=id).delete()
+            seconds_since_midnight_last = (last - last.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
+            diff = seconds_since_midnight_now - seconds_since_midnight_last
+            print (diff)
+            if diff > 10:
+                PlayerBoard.objects.filter(player=player).delete()
+                PlayerInfo.objects.filter(player=player).delete()
                 player.delete()
+                return Response("1")
 
-        return Response("1")
+        return Response("2")
+
+
 
     def post(self, request):
-        player = request.POST('player')
+        pk = request.POST['player']
         now = datetime.datetime.now()
+        player=PlayerInfo.objects.get(pk=pk)
         p, created = PlayerDateTime.objects.get_or_create(player=player)
-        test.update(time=now)
-        return Response(user)
+        p.time = now
+        p.save()
+        return Response("2")
 
 
 class Draw(APIView):
@@ -55,7 +63,10 @@ class Draw(APIView):
         all = list(range(76))
         while i == 0:
             num = all[randint(0, 74)]
-            room = Rooms.objects.get(pk=pk)
+            try:
+                room = Rooms.objects.get(pk=pk)
+            except Rooms.DoesNotExist:
+                return Response("0")
             test, created = Drawn.objects.get_or_create(num=num, room=room)
             if created == 1:
                 i = 1
@@ -65,8 +76,12 @@ class Draw(APIView):
 
 class gettingball(APIView):
     def get(self, request, pk):
+
         latest = 0
-        room = Rooms.objects.get(pk=pk)
+        try:
+            room = Rooms.objects.get(pk=pk)
+        except Rooms.DoesNotExist:
+            return Response("0")
         drawn = Drawn.objects.filter(room=room)
         for ball in drawn:
             if ball.pk > latest:
