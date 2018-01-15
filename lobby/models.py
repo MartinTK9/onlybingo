@@ -53,3 +53,14 @@ class PlayerDateTime(models.Model):
 
     class Meta:
         db_table = 'player_datetime'
+
+
+class Drawn(models.Model):
+    room = models.ForeignKey('Rooms', on_delete=models.CASCADE)
+    num = models.IntegerField()
+
+    def __str__(self):
+        return str(self.room.room_id) + ' - ' + str(self.num)
+
+    class Meta:
+        db_table = 'drawn'
