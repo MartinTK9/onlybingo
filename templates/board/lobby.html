@@ -47,4 +47,11 @@
         <input type="submit" value="filter">
     </form>
 </div>
+     <script>
+     function requestName(id) {
+         var name = prompt("Please enter a name");
+         var url = '/room/' + id + '/' + name;
+         window.location.href=url;
+     }
+    </script>
 {% endblock %}

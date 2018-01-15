@@ -81,7 +81,7 @@ class gettingball(APIView):
         try:
             room = Rooms.objects.get(pk=pk)
         except Rooms.DoesNotExist:
-            return Response("0",status=status.HTTP_400_BAD_REQUEST)
+            return Response("0", status=status.HTTP_400_BAD_REQUEST)
         drawn = Drawn.objects.filter(room=room)
         for ball in drawn:
             if ball.pk > latest:

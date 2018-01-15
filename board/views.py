@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render
 from random import randint
 from .models import *
@@ -236,23 +236,27 @@ def dbcheck(request, player_id, room_id):
             x *= 2
             row.append(dbrow[x:x+2])
 
-    def checker(bnum, numbers):
-        for dnum in numbers:
-            print(dnum)
-            if bnum == dnum:
+    def checker(bnum, number):
+        if bnum == 0:
+            return True
+        for dnum in number:
+            if bnum == dnum.num:
                 return True
+        return False
 
-    board = dbchecker()
+    boardss = dbchecker()
+    boardss[2][2] = 0
 
     numbers = Drawn.objects.filter(room_id=room_id)
 
-    for num in board[0]:
-        print(num)
-        test = checker(int(num), numbers)
-        print(test)
+    count = 0
 
-    context = {
-        'board': board
-    }
+    for boards in boardss:
+        for num in boards:
+            if checker(int(num), numbers):
+                count += 1
+                if count == 5:
+                    return HttpResponse('BINGO!')
+        count = 0
 
-    return render(request, 'board/board.html', context)
+    return HttpResponse('No bingo')

@@ -9,12 +9,17 @@
         <button id="startgame">start game</button>
     {% endif %}
     <table class="lobbylist">
-            <tr><th class="th1">Name</th><th class="th1">Host</th><th></th></tr>
-            {% for player in players %}
-                <tr>
-                    <td>{{ player.name }}</td>
-                    <td>{% if forloop.counter == 1 %}host{% else %}player{% endif %}</td>
-                </tr>
-            {% endfor %}
-        </table>
+        <tr><th class="th1">Name</th><th class="th1">Host</th><th></th></tr>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.name }}</td>
+                <td>{% if forloop.counter == 1 %}host{% else %}player{% endif %}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if not host %}
+        <script>
+            document.getElementsByTagName('body').onload = function() { gamestarted() };
+        </script>
+    {% endif %}
 {% endblock %}
