@@ -19,4 +19,14 @@ class BoardSerializer(serializers.ModelSerializer):
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model= PlayerDateTime
-        fields = ('player')
+        fields = ('player',)
+
+class DrawSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Drawn
+        fields = ('room',)
+
+class DrawnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Drawn
+        fields = '__all__'
