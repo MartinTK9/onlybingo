@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('create/', views.create, name='create'),
     path('room/', views.room, name='room'),
+    path('room/<int:pk>', views.roomjoin, name='roomjoin'),
 ]

@@ -4,21 +4,17 @@
 <div class='lobbylist title'>
     <h1>LOBBYLIST</h1>
     <br><br>
-    <form action="{% url 'room' %}" method="post">
-        {% csrf_token %}
-        <table class="lobbylist">
-            <tr><th class="th1">Name</th><th class="th2">Players</th><th class="th1">Ballspeed</th><th></th></tr>
-            {% for room in rooms %}
-                <tr>
-                    <td>{{ room.name }}</td>
-                    <td>{{ room.players }}</td>
-                    <td>{{ room.speed }}</td>
-                    <td><input type="submit" value="join" ></td>
-                </tr>
-                <input type="hidden" name="game" value="{{ room.room_id }}">
-            {% endfor %}
-        </table>
-    </form>
+    <table class="lobbylist">
+        <tr><th class="th1">Name</th><th class="th2">Players</th><th class="th1">Ballspeed</th><th></th></tr>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.name }}</td>
+                <td>{{ room.players }}</td>
+                <td>{{ room.speed }}</td>
+                <td><button onclick="window.location.href='{% url 'roomjoin' room.room_id %}'">join</button></td>
+            </tr>
+        {% endfor %}
+    </table>
     <br><br>
     <p>Search for:</p>
     <form action="/lobby/" method="post">

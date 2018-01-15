@@ -6,9 +6,9 @@
         <p>Game name:</p>
         <input type="text" name="name" required="true">
         <p>Max Players:</p>
-        <input type="number" min="0" name="players" value="5">
+        <input type="number" min="1" max="15" name="players" value="5">
         <p>Seconds between balls:</p>
-        <input type="number" min="0" name="speed" value="20">
+        <input type="number" min="3" max="60" name="speed" value="20">
         <br><br>
         <input type="submit" value="Create game">
     </form>

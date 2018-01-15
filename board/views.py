@@ -127,13 +127,13 @@ def lobby(request):
     players = PlayerInfo.objects.all()
 
     if request.POST.get('Nametxt', False):
-        rooms = Rooms.objects.filter(name=request.POST['Nametxt'])
+        rooms = Rooms.objects.filter(name=request.POST['Nametxt'], bool=0)
     elif request.POST.get('Numberofplayerstxt', False):
-        rooms = Rooms.objects.filter(players=request.POST['Numberofplayerstxt'])
+        rooms = Rooms.objects.filter(players=request.POST['Numberofplayerstxt'], bool=0)
     elif request.POST.get('Ballspeedtxt', False):
-        rooms = Rooms.objects.filter(speed=request.POST['Ballspeedtxt'])
+        rooms = Rooms.objects.filter(speed=request.POST['Ballspeedtxt'], bool=0)
     else:
-        rooms = Rooms.objects.all()
+        rooms = Rooms.objects.filter(bool=0)
 
     context = {
         'rooms': rooms,
@@ -153,30 +153,34 @@ def create(request):
 
 def room(request):
 
-    if request.POST.get('bool', False):
-        newroom = Rooms()
+    newroom = Rooms()
 
-        newroom.name = request.POST['name']
-        newroom.speed = request.POST['speed']
-        newroom.players = request.POST['players']
+    newroom.name = request.POST['name']
+    newroom.speed = request.POST['speed']
+    newroom.players = request.POST['players']
 
-        newroom.save()
+    newroom.save()
 
-        host = True
+    context = {
+        'host': True,
+        'detail': newroom,
+    }
 
-    elif request.POST.get('game', False):
-        rooms = Rooms.objects.filter(pk=request.POST['game'])
+    return render(request, 'board/room.html', context)
+
+
+def roomjoin(request, pk):
+    if Rooms.objects.filter(pk=pk):
+        rooms = Rooms.objects.filter(pk=pk)
 
         for e in rooms:
             newroom = e
-
-        host = False
 
     else:
         raise Http404
 
     context = {
-        'host': host,
+        'host': False,
         'detail': newroom,
     }
 

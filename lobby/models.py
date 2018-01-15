@@ -6,7 +6,7 @@ class Rooms(models.Model):
     name = models.CharField(max_length=30)
     speed = models.IntegerField(default=20)
     players = models.IntegerField(default=5)
-
+    bool = models.BooleanField(default=0)
 
     def __str__(self):
         return str(self.room_id) + ' - ' + self.name
@@ -42,3 +42,14 @@ class PlayerBoard(models.Model):
 
     class Meta:
         db_table = 'player_board'
+
+
+class PlayerDateTime(models.Model):
+    player = models.ForeignKey('PlayerInfo', on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.player.name + ' - ' + str(self.time)
+
+    class Meta:
+        db_table = 'player_datetime'
