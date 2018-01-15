@@ -2,10 +2,11 @@
 {% block content %}
     <h1>{{ detail.name }}</h1>
     <h2>You are {{ player.name }}</h2>
-    <h1 id=pk class="hidden">{{ room.room_id }}</h1>
+    <input id="pk" type="text" class="hidden" value="{{ player.room_id }}">
+    <input id="player" type="text" class="hidden" value="{{ player.player_id }}">
 
     {% if host %}
-        <button onclick="gamestart()">start game</button>
+        <button id="startgame">start game</button>
     {% endif %}
     <table class="lobbylist">
             <tr><th class="th1">Name</th><th class="th1">Host</th><th></th></tr>

@@ -27,34 +27,34 @@ class roomlist(APIView):
             return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
 
-class connection(APIView):
-    def get(self, request):
-        players = PlayerDateTime.objects.all()
-        now = datetime.datetime.now()
-        seconds_since_midnight_now = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
-        for player in players:
-            last = player.time
-            seconds_since_midnight_last = (last - last.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
-            diff = seconds_since_midnight_now - seconds_since_midnight_last
-            print (diff)
-            if diff > 10:
-                PlayerBoard.objects.filter(player=player).delete()
-                PlayerInfo.objects.filter(player=player).delete()
-                player.delete()
-                return Response("1")
-
-        return Response("2")
-
-
-
-    def post(self, request):
-        pk = request.POST['player']
-        now = datetime.datetime.now()
-        player=PlayerInfo.objects.get(pk=pk)
-        p, created = PlayerDateTime.objects.get_or_create(player=player)
-        p.time = now
-        p.save()
-        return Response("2")
+# class connection(APIView):
+#     def get(self, request):
+#         players = PlayerDateTime.objects.all()
+#         now = datetime.datetime.now()
+#         seconds_since_midnight_now = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
+#         for player in players:
+#             last = player.time
+#             seconds_since_midnight_last = (last - last.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
+#             diff = seconds_since_midnight_now - seconds_since_midnight_last
+#             print (diff)
+#             if diff > 10:
+#                 PlayerBoard.objects.filter(player=player).delete()
+#                 PlayerInfo.objects.filter(player=player).delete()
+#                 player.delete()
+#                 return Response("1")
+#
+#         return Response("2")
+#
+#
+#
+#     def post(self, request):
+#         pk = request.POST['player']
+#         now = datetime.datetime.now()
+#         player=PlayerInfo.objects.get(pk=pk)
+#         p, created = PlayerDateTime.objects.get_or_create(player=player)
+#         p.time = now
+#         p.save()
+#         return Response("2")
 
 
 class Draw(APIView):
@@ -81,7 +81,7 @@ class gettingball(APIView):
         try:
             room = Rooms.objects.get(pk=pk)
         except Rooms.DoesNotExist:
-            return Response("0")
+            return Response("0",status=status.HTTP_400_BAD_REQUEST)
         drawn = Drawn.objects.filter(room=room)
         for ball in drawn:
             if ball.pk > latest:

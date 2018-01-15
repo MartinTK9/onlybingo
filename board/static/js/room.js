@@ -1,22 +1,15 @@
-$(document).ready(() => {
-    function ping(times)
-    {
-        var pk=$('#pk').innerHTML()
-        $.ajax({
-            url: "http://www.hulstjes.nl/api/connection/",
-            type: "post",
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify({ "player": pk,}),
-            processData: false,
-            succes: function () {
 
-            },
+
+$(document).ready(function() {
+    var url = "http://www.hulstjes.nl/api/draw/" + $("#pk").val();
+
+    $('#startgame').on('click',function() {
+        $.get(url, function (data) {
+
+        }).fail(function () {
+            alert("Error creating room");
+        }).done(function () {
+            window.location.replace("http://www.hulstjes.nl/" + $('#pk').val() + "/" + $('#player').val());
         });
-    };
-    function gamestart(){
-        $.get("http://www.hulstjes.nl/api/draw/"+$.("#pk").innerHTML,function(data){
-            alert(data)
-        };)
-    };
-}
+    });
+});
