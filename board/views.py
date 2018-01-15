@@ -5,7 +5,7 @@ from .models import *
 
 
 def board(request, room_id, player_id):
-    name = PlayerBoard.objects.filter(player_id=player_id, bool=0)
+    name = PlayerBoard.objects.get(player_id=player_id, bool=0)
 
     col1num = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
     col2num = list(range(16, 31))
@@ -49,9 +49,6 @@ def board(request, room_id, player_id):
 
     def dbchecker():
         for i in name:
-            bdboard = i
-
-        for i in bdboard:
             dbrow0 = i.row0
             dbrow1 = i.row1
             dbrow2 = i.row2
@@ -94,10 +91,7 @@ def board(request, room_id, player_id):
         strrow3 = ''.join(str(e) for e in board[3])
         strrow4 = ''.join(str(e) for e in board[4])
 
-        players = PlayerInfo.objects.filter(room_id=room_id, player_id=player_id)
-
-        for o in players:
-            player = o
+        player = PlayerInfo.objects.get(room_id=room_id, player_id=player_id)
 
         db = PlayerBoard()
 
@@ -175,10 +169,7 @@ def room(request):
 
 def roomjoin(request, pk, name):
     if Rooms.objects.filter(pk=pk):
-        rooms = Rooms.objects.filter(pk=pk)
-
-        for e in rooms:
-            newroom = e
+        newroom = Rooms.objects.get(pk=pk)
 
     else:
         raise Http404
