@@ -1,8 +1,10 @@
 {% extends 'board/base.html' %}
 {% block content %}
 <div class="bingokaart">
-    <form action="http://www.hulstjes.nl/API/lobby/" method="post">
+    <form action="{% url 'room' %}" method="post">
         {% csrf_token %}
+        <p>Your name:</p>
+        <input type="text" name="player_name" required="true">
         <p>Game name:</p>
         <input type="text" name="name" required="true">
         <p>Max Players:</p>

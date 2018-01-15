@@ -4,8 +4,8 @@ from random import randint
 from .models import *
 
 
-def board(request, room_id, player_name):
-    name = PlayerInfo.objects.filter(name=player_name, bool=0, room_id=room_id)
+def board(request, room_id, player_id):
+    name = PlayerBoard.objects.filter(player_id=player_id, bool=0)
 
     col1num = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
     col2num = list(range(16, 31))
@@ -49,9 +49,7 @@ def board(request, room_id, player_name):
 
     def dbchecker():
         for i in name:
-            board_id = i.player_id
-
-            bdboard = PlayerBoard.objects.filter(player_id=board_id)
+            bdboard = i
 
         for i in bdboard:
             dbrow0 = i.row0
@@ -96,16 +94,14 @@ def board(request, room_id, player_name):
         strrow3 = ''.join(str(e) for e in board[3])
         strrow4 = ''.join(str(e) for e in board[4])
 
-        player = PlayerInfo()
+        players = PlayerInfo.objects.filter(room_id=room_id, player_id=player_id)
 
-        player.room_id = room_id
-        player.name = player_name
-
-        player.save()
+        for o in players:
+            player = o
 
         db = PlayerBoard()
 
-        db.player_id = player.player_id
+        db.player_id = player
         db.row0 = strrow0
         db.row1 = strrow1
         db.row2 = strrow2
@@ -161,15 +157,23 @@ def room(request):
 
     newroom.save()
 
+    player = PlayerInfo()
+
+    player.room_id = newroom.room_id
+    player.name = request.POST['player_name']
+
+    player.save()
+
     context = {
         'host': True,
         'detail': newroom,
+        'player': player,
     }
 
     return render(request, 'board/room.html', context)
 
 
-def roomjoin(request, pk):
+def roomjoin(request, pk, name):
     if Rooms.objects.filter(pk=pk):
         rooms = Rooms.objects.filter(pk=pk)
 
@@ -179,9 +183,17 @@ def roomjoin(request, pk):
     else:
         raise Http404
 
+    player = PlayerInfo()
+
+    player.room_id = pk
+    player.name = name
+
+    player.save()
+
     context = {
         'host': False,
         'detail': newroom,
+        'player': player,
     }
 
     return render(request, 'board/room.html', context)
