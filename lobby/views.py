@@ -7,7 +7,7 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import *
-
+import datetime
 from .models import *
 
 #API DOCUMENTATION
@@ -29,3 +29,26 @@ class roomlist(APIView):
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+
+class connection(APIView):
+    def get(self,request):
+        PlayerDateTime.objects.all()
+        now = datetime.datetime.now()
+        for player in PlayerDateTime:
+            last = player.time
+            diff=  now-last
+            time_s = diff.seconds
+            if diff.seconds>10:
+                id=player.player
+                PlayerBoard.objects.filter(players=id).delete()
+                PlayerInfo.objects.filter(players=id).delete()
+                player.delete()
+
+        return Response("1")
+    def post(self,request):
+        player = request.POST('player')
+        now = datetime.datetime.now()
+        user.player, created = PlayerDateTime.objects.get_or_create(player=player)
+        user.update(time=now)
+
+

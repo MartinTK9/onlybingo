@@ -6,4 +6,14 @@
     {% if host %}
         <button>start game</button>
     {% endif %}
+    <table class="lobbylist">
+            <tr><th class="th1">Name</th><th class="th2"></th><th class="th1">Host</th><th></th></tr>
+            {% for player in players %}
+                <tr>
+                    <td>{{ player.name }}</td>
+                    <td>{% if player.bool == 1 %}"host"{% else %}"player"{% endif %}</td>
+                </tr>
+                <input type="hidden" name="" value="{{ room.room_id }}">
+            {% endfor %}
+        </table>
 {% endblock %}

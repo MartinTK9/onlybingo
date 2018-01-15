@@ -15,3 +15,8 @@ class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model= PlayerBoard
         fields = '__all__'
+
+class UpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= PlayerDateTime
+        fields = ('player')

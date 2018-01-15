@@ -197,3 +197,4 @@ def roomjoin(request, pk, name):
     }
 
     return render(request, 'board/room.html', context)
+
