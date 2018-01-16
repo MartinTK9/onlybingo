@@ -33,7 +33,9 @@
                 <td>{% if forloop.counter == 1 %}host{% else %}player{% endif %}</td>
             </tr>
         {% endfor %}
+
     </table>
+    <a href="{% url 'index' %}" style="font-size: 26px; color: #674d3c; text-decoration: none; padding-bottom: 30px;">Go back to menu</a>
     {% if not host %}
         <script>
             setInterval(function(){

@@ -1,7 +1,7 @@
 {% extends 'board/base.html' %}
 {% block content %}
 <div class="bingokaart">
-    <form action="{% url 'room' %}" method="post">
+    <form action="{% url 'room' %}" method="post" style="padding-bottom: 30px;">
         {% csrf_token %}
         <p>Your name:</p>
         <input type="text" name="player_name" required="true">
@@ -14,5 +14,6 @@
         <br><br>
         <input type="submit" value="Create game">
     </form>
+    <a href="{% url 'index' %}" style="font-size: 26px; color: #674d3c; text-decoration: none; padding-bottom: 30px;">Go back to menu</a>
 </div>
 {% endblock %}
