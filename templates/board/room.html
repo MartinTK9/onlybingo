@@ -1,6 +1,6 @@
 {% extends 'board/base.html' %}
 {% block content %}
-    <h1>{{ detail.name }}</h1>
+    <h1>Room name:{{ detail.name }}</h1>
     <h2>You are {{ player.name }}</h2>
     <input id="pk" type="text" class="hidden" value="{{ player.room_id }}">
     <input id="player" type="text" class="hidden" value="{{ player.player_id }}">
@@ -8,16 +8,17 @@
     {% if host %}
         <button id="startgame">start game</button>
         <script>$(document).ready(function() {
-    var url = "http://www.hulstjes.nl/api/draw/" + $("#pk").val();
+    var url = "http://www.hulstjes.nl/api/draw/" + $("#pk").val()+"/";
 
     $('#startgame').on('click',function() {
         $.get(url, function (data) {
 
         }).fail(function () {
+            console.log(data)
             alert("Error creating room");
         }).done(function () {
-            localStorage.setItem("host",true)
-            window.location.replace("http://www.hulstjes.nl/" + $('#pk').val() + "/" + $('#player').val());
+            localStorage.setItem("host","true")
+            window.location.replace("http://www.hulstjes.nl/" + $('#pk').val() + "/" + $('#player').val()+"/");
         });
     });
 
@@ -42,6 +43,7 @@
                 console.log("game hasnt started yet")
             }).done(function(){
                 window.clearInterval();
+                localStorage.setItem("host","false")
                 window.location.replace("http://www.hulstjes.nl/" + $('#pk').val() + "/" + $('#player').val());
             })
         },1000);

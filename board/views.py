@@ -261,3 +261,6 @@ def dbcheck(request, player_id, room_id):
         count = 0
 
     return render(request, 'board/bingo.html', {'bingo': False})
+
+def highscores(request):
+    return render(request,'board/highscores.html')

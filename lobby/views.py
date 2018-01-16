@@ -60,6 +60,7 @@ class roomlist(APIView):
 class Draw(APIView):
     def get(self, request, pk):
         i = 0
+        tried = 0
         all = list(range(76))
         while i == 0:
             num = all[randint(0, 74)]
@@ -70,6 +71,9 @@ class Draw(APIView):
             test, created = Drawn.objects.get_or_create(num=num, room=room)
             if created == 1:
                 i = 1
+            tried += 1
+            if tried > 74:
+                return Response("0")
         da = DrawnSerializer(test)
         return Response(da.data, status=status.HTTP_201_CREATED)
 

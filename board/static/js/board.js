@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var seconds=$('#seconds').val();
-    if (localStorage.getItem("host") == true) {
+    if (localStorage.getItem("host") == "true") {
         drawball()
     }
     else {
@@ -12,25 +12,29 @@ $(document).ready(function() {
     function getball(){
         var ball=0;
         $.get("http://www.hulstjes.nl/api/drawn/" + $("#pk").val(),function(data) {
-
-            $('#ball').innerText = Object.values(data)[1];
-            ball=Object.values(data)[1]
+                ball = Object.values(data)[1]
+                document.getElementById('ball').innerHTML = ball
+                console.log($('#ball').innerHTML);
         })
         setInterval(function(){
            $.get("http://www.hulstjes.nl/api/drawn/" + $("#pk").val(),function(){
-               var newball=Object.values(data)[1];
-               $('#ball').innerText = newball
+               ball = Object.values(data)[1]
+               document.getElementById('ball').innerHTML = ball
+               console.log($('#ball').innerHTML);
            })
         },seconds*500)
     }
     //Needs to run on host browser in board view
     function drawball(){
         var url = "http://www.hulstjes.nl/api/draw/" + $("#pk").val();
-
+        var ball = 0;
         setInterval(function(){
             $.get(url, function (data) {
-                $('#ball').innerText = Object.values(data)[1]
+                ball = Object.values(data)[1]
+                document.getElementById('ball').innerHTML = ball
+                console.log($('#ball').innerHTML);
             })
-        },seconds*10000)
+
+        },seconds*1000)
     }
 });

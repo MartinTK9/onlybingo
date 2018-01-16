@@ -8,5 +8,6 @@ urlpatterns = [
     path('create/', views.create, name='create'),
     path('room/', views.room, name='room'),
     path('room/<int:pk>/<str:name>', views.roomjoin, name='roomjoin'),
-    path('<int:room_id>/<int:player_id>/check/', views.dbcheck, name='dbcheck')
+    path('<int:room_id>/<int:player_id>/check/', views.dbcheck, name='dbcheck'),
+    path('highscores/',views.highscores,name='highscores'),
 ]
